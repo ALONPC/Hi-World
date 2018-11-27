@@ -15,11 +15,13 @@ export class CountriesComponent implements OnInit {
   countries : any = [];
   regions : any = [];
 
-  createCountry(name, capital, currency, territoryKm, arrRegions, code){
+  createCountry(name, capital, languages, currency, nationalDay, territoryKm, arrRegions, code){
     var country =  new Country();
     country.name = name;
     country.capital = capital;
+    country.languages = languages;
     country.currency = currency;
+    country.nationalDay = this.formatNationalDay(nationalDay);
     country.territoryKm = territoryKm;
     country.regions = arrRegions;
     country.code = code;
@@ -41,7 +43,35 @@ export class CountriesComponent implements OnInit {
     return regionsOfCountry;
   }
 
+  getGetOrdinal(n) {
+    var s=["th","st","nd","rd"],
+    v=n%100;
+    return n+(s[(v-20)%10]||s[v]||s[0]);
+  }
+
+  formatNationalDay(nationalDay){
+    var date = new Date(nationalDay);
+    var day = date.getDate();
+    var dayOrdinal = this.getGetOrdinal(day);
+    var month = date.toLocaleString('en-US', {
+      month:'long'
+    });
+    if(date.getFullYear()!=2001){
+      var year = date.getFullYear();
+    } else {
+      var year = '';
+    }
+    var dateStr = month+', '+dayOrdinal+' '+year;
+    return dateStr;
+  }
+
   constructor() { 
+
+    var auLang = ['English'];
+    var caLang = ['English','French'];
+    var clLang = ['Chilean Flaite','Spanish'];
+    var seLang = ['Swedish'];
+    var fiLang = ['Finnish','Swedish'];
 
     var australianStates    = ['Western Australia','Northern Territory','South Australia','Queensland','New South Wales','Victoria'];
     var cananadianProvinces = ['Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador', 'Northwest Territories', 'Nova Scotia', 'Nunavut', 'Ontario', 'Prince Edward Island', 'Quebec', 'Saskatchewan', 'Yukon Territory'];
@@ -55,14 +85,15 @@ export class CountriesComponent implements OnInit {
     var allSwedishCounties    = this.buildRegionsOfCountry(swedishCounties);
     var allFinnishRegions     = this.buildRegionsOfCountry(finnishRegions);
 
-    this.createCountry('Australia', 'Camberra', 'Australian Dollar', 7741220, allAustralianRegions, 'au');
-    this.createCountry('Canada', 'Ottawa', 'Canadian Dollar', 9984670, allCanadianProvinces, 'ca');
-    this.createCountry('Chile', 'Santiago', 'Chilean Peso', 7561024, allChileanRegions, 'cl');
-    this.createCountry('Sweden', 'Stockholm', 'Swedish Krona', 450295, allSwedishCounties, 'se');
-    this.createCountry('Finland', 'Helsinki', 'Euro', 338424, allFinnishRegions, 'fi');
+    this.createCountry('Australia', 'Camberra', auLang, 'Australian Dollar', 'January-26', 7741220, allAustralianRegions, 'au');
+    this.createCountry('Canada', 'Ottawa', caLang, 'Canadian Dollar', 'July-1', 9984670, allCanadianProvinces, 'ca');
+    this.createCountry('Chile', 'Santiago', clLang, 'Chilean Peso', 'September-18-1810', 7561024, allChileanRegions, 'cl');
+    this.createCountry('Sweden', 'Stockholm', seLang, 'Swedish Krona', 'June-6', 450295, allSwedishCounties, 'se');
+    this.createCountry('Finland', 'Helsinki', fiLang, 'Euro', 'December-6', 338424, allFinnishRegions, 'fi');
 
     console.log(this.allRegions);
     console.log(this.allCountries);
+
   }
 
   ngOnInit() {

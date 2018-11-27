@@ -5,8 +5,10 @@
     <div class="uk-width-1-1"><h1 class="uk-heading-hero">{{ country.name }}</h1></div>
     <div class="uk-width-1-1"><h1 class="uk-heading-divider">{{ country.capital }}</h1></div>
 
+    <h3 *ngFor="let language of country.languages; let j = index" class="uk-heading-bullet"><i class="fas fa-language"></i> {{ country.languages[j] }}</h3>
     <h3 class="uk-heading-bullet"><i class="fas fa-globe-americas"></i> {{ country.territoryKm }} km2</h3>
     <h3 class="uk-heading-bullet"><i class="far fa-money-bill-alt"></i> {{ country.currency }}</h3>
+    <h3 class="uk-heading-bullet"><i class="far fa-calendar-alt"></i> {{ country.nationalDay }}</h3>
 
   </div>
 
