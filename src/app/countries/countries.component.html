@@ -1,7 +1,14 @@
 
 <div *ngFor="let country of allCountries; let i = index" class="uk-light uk-background-secondary uk-card uk-grid-collapse uk-padding" uk-grid>
   
-  <div class="uk-width-1-1"><h1 class="uk-heading-hero">{{ country.name }}</h1></div>
+  <div class="uk-column-1-4" uk-grid>
+    <div class="uk-width-1-1"><h1 class="uk-heading-hero">{{ country.name }}</h1></div>
+    <div class="uk-width-1-1"><h1 class="uk-heading-divider">{{ country.capital }}</h1></div>
+
+    <h3 class="uk-heading-bullet"><i class="fas fa-globe-americas"></i> {{ country.territoryKm }} km2</h3>
+    <h3 class="uk-heading-bullet"><i class="far fa-money-bill-alt"></i> {{ country.currency }}</h3>
+
+  </div>
 
   <div class="uk-card-body uk-column-1-2">   
     <img src="assets/img/flags/{{ country.code }}.png" alt="">
