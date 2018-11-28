@@ -50,6 +50,7 @@ export class CountriesComponent implements OnInit {
   }
 
   formatNationalDay(nationalDay){
+    var year : any;
     var date = new Date(nationalDay);
     var day = date.getDate();
     var dayOrdinal = this.getGetOrdinal(day);
@@ -57,9 +58,9 @@ export class CountriesComponent implements OnInit {
       month:'long'
     });
     if(date.getFullYear()!=2001){
-      var year = date.getFullYear();
+      year = date.getFullYear();
     } else {
-      var year = '';
+      year = '';
     }
     var dateStr = month+', '+dayOrdinal+' '+year;
     return dateStr;
